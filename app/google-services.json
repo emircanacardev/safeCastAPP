@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "342814187734",
+    "project_id": "safecast-db",
+    "storage_bucket": "safecast-db.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:342814187734:android:d9db0166d41c67bd4c2977",
+        "android_client_info": {
+          "package_name": "com.example.safecast"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCkK445JP-Dy4uug5f7Vy5Z2klxkE3Ow_Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

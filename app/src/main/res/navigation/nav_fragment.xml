@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/mainPageFragment">
+
+    <fragment
+        android:id="@+id/mainPageFragment"
+        android:name="com.example.safecast.MainPage"
+        android:label="MainPage"
+        tools:layout="@layout/fragment_main_page" >
+        <action
+            android:id="@+id/add_relatives_transaction"
+            app:destination="@id/addRelatives" />
+        <action
+            android:id="@+id/relative_list_transaction"
+            app:destination="@id/relativesList" />
+    </fragment>
+    <dialog
+        android:id="@+id/addRelatives"
+        android:name="com.example.safecast.AddRelatives"
+        android:label="AddRelatives"
+        tools:layout="@layout/fragment_add_relatives"/>
+    <dialog
+        android:id="@+id/relativesList"
+        android:name="com.example.safecast.RelativesList"
+        android:label="RelativesList"
+        tools:layout="@layout/fragment_relatives_list"/>
+
+</navigation>
