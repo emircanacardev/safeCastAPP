@@ -1,0 +1,11 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <!-- Kenarlık rengi ve kalınlığı -->
+    <stroke
+        android:width="2dp"
+        android:color="@color/primary_red" /> <!-- Renk buradan ayarlanır -->
+
+    <!-- Köşeleri yumuşatmak için -->
+    <corners android:radius="10dp" />
+</shape>

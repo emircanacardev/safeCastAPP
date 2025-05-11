@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    app:startDestination="@id/mainPageFragment">
+    app:startDestination="@id/loginPage">
 
     <fragment
         android:id="@+id/mainPageFragment"
@@ -26,5 +26,14 @@
         android:name="com.example.safecast.RelativesList"
         android:label="RelativesList"
         tools:layout="@layout/fragment_relatives_list"/>
+    <fragment
+        android:id="@+id/loginPage"
+        android:name="com.example.safecast.LoginPage"
+        android:label="fragment_login_page"
+        tools:layout="@layout/fragment_login_page" >
+        <action
+            android:id="@+id/login_auth"
+            app:destination="@id/mainPageFragment" />
+    </fragment>
 
 </navigation>
