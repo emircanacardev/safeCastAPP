@@ -34,7 +34,6 @@ class LocationManager(private val context: Context, private val callback: (Locat
         ).apply {
             setWaitForAccurateLocation(true)
             setMinUpdateIntervalMillis(5000L) // 5 saniye minimum güncelleme aralığı
-            setMaxUpdates(1) // Sadece bir kez güncelleme almak için
         }.build()
 
         val locationCallback = object : LocationCallback() {

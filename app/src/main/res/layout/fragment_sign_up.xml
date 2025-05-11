@@ -52,27 +52,47 @@
         app:layout_constraintVertical_bias="0.0">
 
         <TextView
-            android:id="@+id/signInTitle"
+            android:id="@+id/signUpTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="16dp"
-            android:text="Sign In"
+            android:text="Sign Up"
             android:textAllCaps="false"
             android:textColor="@color/primary_red"
             android:textSize="48sp"
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/inputLoginEmail"
+            android:id="@+id/inputSignUpName"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:background="@drawable/rounded_stroke_dark_red_bg"
+            android:hint="Name Surname"
+            android:inputType="text"
+            android:paddingStart="16dp" />
+
+        <EditText
+            android:id="@+id/inputSignUpEmail"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="16dp"
             android:background="@drawable/rounded_stroke_dark_red_bg"
             android:hint="E-mail"
             android:inputType="textEmailAddress"
             android:paddingStart="16dp" />
 
         <EditText
-            android:id="@+id/inputLoginPassword"
+            android:id="@+id/inputSignUpPhoneNumber"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/rounded_stroke_dark_red_bg"
+            android:hint="Phone Number"
+            android:inputType="phone"
+            android:paddingStart="16dp" />
+
+        <EditText
+            android:id="@+id/inputSignUpPassword"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="16dp"
@@ -81,13 +101,25 @@
             android:inputType="textPassword"
             android:paddingStart="16dp" />
 
+        <EditText
+            android:id="@+id/inputSignUpPasswordAgain"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/rounded_stroke_dark_red_bg"
+            android:hint="Password Again"
+            android:inputType="textPassword"
+            android:paddingStart="16dp" />
+
+
+        <!-- Save Butonu -->
         <Button
-            android:id="@+id/signInButton"
+            android:id="@+id/signUpButton"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="16dp"
             android:backgroundTint="@color/primary_red"
-            android:text="sign in"
+            android:text="sign up"
             android:textAlignment="center"
             android:textAllCaps="true"
             android:textColor="@color/white"
@@ -95,17 +127,17 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/switchSignUp"
+            android:id="@+id/switchSignIn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Don't have an account? Sign Up"
+            android:layout_marginBottom="64dp"
+            android:text="You already have an account? Sign In"
             android:textAlignment="center"
             android:textAllCaps="false"
             android:textColor="@color/primary_red"
-            android:textStyle="bold"
-            android:layout_marginBottom="96dp"
             android:textSize="20dp"
-            />
+            android:textStyle="bold" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

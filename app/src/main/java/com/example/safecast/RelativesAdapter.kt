@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.safecast.databinding.RelativesItemViewBinding
 import java.util.ArrayList
@@ -39,9 +40,9 @@ class RelativesAdapter (var mContext: Context, var relativesList: ArrayList<Rela
 
             firestoreManager = FirestoreManager.getInstance()
 
-            firestoreManager.deleteRelative("nQLgfw2tXpj56WQ4cDvT", person.id, {
+            firestoreManager.deleteRelative(person.id, {
                 // Silme işlemi başarılı
-                Log.e("RelativesAdapter", "Relative successfully deleted")
+                Toast.makeText(mContext, "Relative successfully deleted", Toast.LENGTH_SHORT).show()
                 // Silinen relative'ı listeden de kaldırıyoruz
                 relativesList.remove(person)
                 notifyDataSetChanged()  // Adapter'ı güncelliyoruz

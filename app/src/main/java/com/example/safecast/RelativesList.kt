@@ -32,13 +32,13 @@ class RelativesList : BottomSheetDialogFragment() {
 
         // Firestore'dan gelen veriyi alıp listeye ekliyoruz
         // BURAYA DİKKAT!!!!!!!!!!!
-        fetchRelativesForUser("nQLgfw2tXpj56WQ4cDvT")
+        fetchRelativesForUser()
         return binding.root
     }
 
 
-    private fun fetchRelativesForUser(userId: String) {
-        firestoreManager.getRelatives(userId, { relatives ->
+    private fun fetchRelativesForUser() {
+        firestoreManager.getRelatives({ relatives ->
             // Gelen veriyi listeye ekliyoruz
             relativesList.clear()
             relativesList.addAll(relatives)
@@ -47,6 +47,5 @@ class RelativesList : BottomSheetDialogFragment() {
             Log.e("RelativesList", "Error fetching relatives", error)
         })
     }
-
 }
 

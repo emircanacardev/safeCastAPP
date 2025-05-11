@@ -67,7 +67,8 @@
             android:layout_gravity="center_horizontal"
             android:fontFamily="cursive"
             android:gravity="center_vertical"
-            android:paddingBottom="15dp"
+            android:paddingBottom="32dp"
+            android:paddingTop="16dp"
             android:text="SafeCast"
             android:textColor="@color/white"
             android:textSize="56sp"
@@ -131,6 +132,51 @@
             app:strokeWidth="5dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/account_detail_button"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="16dp"
+        android:backgroundTint="@color/error_red"
+        android:backgroundTintMode="add"
+        android:elevation="4dp"
+        android:gravity="center"
+        app:cornerRadius="10dp"
+        app:icon="@drawable/account"
+        app:iconGravity="textTop"
+        app:iconPadding="0dp"
+        app:iconSize="28dp"
+        app:iconTint="@android:color/white"
+        app:iconTintMode="src_in"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+        app:layout_constraintStart_toStartOf="@+id/toolbar"
+        app:layout_constraintTop_toTopOf="@+id/toolbar"
+        app:layout_constraintVertical_bias="0.5"
+        app:strokeColor="@color/stroke_for_primary_button_red"
+        app:strokeWidth="5dp" />
+
+    <Button
+        android:id="@+id/notification_button"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="@color/error_red"
+        android:backgroundTintMode="add"
+        android:elevation="4dp"
+        app:cornerRadius="10dp"
+        app:icon="@drawable/notification_icon"
+        app:iconGravity="textTop"
+        app:iconPadding="0dp"
+        app:iconSize="28dp"
+        app:iconTint="@android:color/white"
+        app:iconTintMode="src_in"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbar"
+        app:layout_constraintVertical_bias="0.5"
+        app:strokeColor="@color/stroke_for_primary_button_red"
+        app:strokeWidth="5dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

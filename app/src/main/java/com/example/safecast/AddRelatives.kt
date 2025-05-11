@@ -26,7 +26,7 @@ class AddRelatives : BottomSheetDialogFragment() {
             var relative = RelativeDataClass("", binding.inputTextName.text.toString(), binding.inputPhoneNumber.text.toString())
 
             //BURAYA DÜZENLEME GELECEK USER ID İÇİN !!!!!!!!!!
-            firestoreManager.addRelative("nQLgfw2tXpj56WQ4cDvT", relative, {
+            firestoreManager.addRelative(relative, {
                 // Başarılı işlem
                 Toast.makeText(requireContext(), "Relative added!", Toast.LENGTH_SHORT).show()
                 binding.inputTextName.setText("")

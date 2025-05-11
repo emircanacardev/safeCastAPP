@@ -8,8 +8,8 @@ plugins {
 buildscript{
     dependencies {
         // Firebase plugin
-        classpath ("com.google.gms:google-services:4.4.2")  // Firebase Services plugin
-        classpath("androidx.navigation:navigation-safe-args-gradle-plugin:2.5.3")
+        classpath("com.google.gms:google-services:4.4.2")  // Firebase Services plugin
+        classpath("androidx.navigation:navigation-safe-args-gradle-plugin:2.9.0")
 
     }
 }

@@ -7,7 +7,6 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <!-- Başlık -->
     <TextView
         android:id="@+id/add_relatives_title"
         android:layout_width="match_parent"
@@ -20,7 +19,6 @@
         android:textSize="24sp"
         android:textStyle="bold" />
 
-    <!-- Kullanıcı Adı Girişi -->
     <EditText
         android:id="@+id/inputTextName"
         android:layout_width="match_parent"
@@ -28,9 +26,8 @@
         android:background="@drawable/rounded_soft_red_bg"
         android:hint="Name Surname"
         android:inputType="text"
-        android:paddingStart="16dp" /> <!-- Arka plan yuvarlatılmış olacak -->
+        android:paddingStart="16dp" />
 
-    <!-- Telefon Numarası Girişi -->
     <EditText
         android:id="@+id/inputPhoneNumber"
         android:layout_width="match_parent"
@@ -39,9 +36,8 @@
         android:background="@drawable/rounded_soft_red_bg"
         android:hint="Phone Number"
         android:inputType="phone"
-        android:paddingStart="16dp" /> <!-- Arka plan yuvarlatılmış olacak -->
+        android:paddingStart="16dp" />
 
-    <!-- Save Butonu -->
     <Button
         android:id="@+id/addRelativeButton"
         android:layout_width="match_parent"
