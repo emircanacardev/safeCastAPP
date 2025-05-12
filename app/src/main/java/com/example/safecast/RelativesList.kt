@@ -27,6 +27,8 @@ class RelativesList : BottomSheetDialogFragment() {
         // RecyclerView için adapter'ı oluşturuyoruz
 
         relativesAdapter = RelativesAdapter(requireContext(), relativesList)
+        Log.e("Firestore", relativesList.toString())
+
         binding.relativesList.layoutManager = LinearLayoutManager(requireContext())
         binding.relativesList.adapter = relativesAdapter
 

@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
         locationManager = LocationManager(this)
 
         if (locationManager.hasLocationPermission()) {
@@ -29,7 +30,7 @@ class MainActivity : AppCompatActivity() {
                 Log.d("LM", "Location services enabled!")
                 locationManager.getCurrentLocation{ location ->
                     location?.let {
-                    Log.d("Location", "Lat: ${it.latitude}, Lng: ${it.longitude}")
+                        Log.d("Location", "Lat: ${it.latitude}, Lng: ${it.longitude}")
                     }
                 }
             } else {
