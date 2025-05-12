@@ -86,6 +86,9 @@ class FirestoreManager private constructor() {
             }
     }
 
+    fun logoutUser() {
+        auth.signOut()
+    }
 
     // Akraba ekle (bir kullanıcıya ait)
     fun addRelative(relative: RelativeDataClass, onSuccess: () -> Unit, onFailure: (Exception) -> Unit) {
@@ -111,22 +114,26 @@ class FirestoreManager private constructor() {
     }
 
 
-    // Kullanıcıları getir
-    fun getAllUsers(onSuccess: (List<Pair<String, UserDataClass>>) -> Unit, onFailure: (Exception) -> Unit) {
-        firestore.collection("user")
-            .get()
-            .addOnSuccessListener { result ->
-                val users = result.documents.mapNotNull { doc ->
-                    val user = doc.toObject(UserDataClass::class.java)
-                    user?.let { Pair(doc.id, it) } // Kullanıcıyı ve ID'sini döner
+    // Kullanıcıyı getir
+    fun getUser(onSuccess: (UserDataClass) -> Unit, onFailure: (Exception) -> Unit) {
+        val userId = FirebaseAuth.getInstance().currentUser?.uid
+        if (userId != null)
+        {
+            firestore.collection("user").document(userId).get().addOnSuccessListener { snapshot ->
+                if (snapshot.exists()) {
+                    val user = snapshot.toObject(UserDataClass::class.java)
+                    if (user != null) {
+                        onSuccess(user)
+                    } else {
+                        onFailure(Exception("User conversion failed"))
+                    }
+                } else {
+                    onFailure(Exception("User not found"))
                 }
-                onSuccess(users)
             }
-            .addOnFailureListener { e ->
-                Log.e("Firestore", "Error getting users", e)
-                onFailure(e)
-            }
+        }
     }
+
 
     fun getRelatives(onSuccess: (List<RelativeDataClass>) -> Unit, onFailure: (Exception) -> Unit) {
         val userId = FirebaseAuth.getInstance().currentUser?.uid

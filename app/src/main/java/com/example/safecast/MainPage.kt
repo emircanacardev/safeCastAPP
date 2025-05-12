@@ -20,7 +20,6 @@ class MainPage : Fragment() {
     private var lastKnownLocationUrl: String = ""
     private lateinit var locationManager: LocationManager
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -70,16 +69,21 @@ class MainPage : Fragment() {
         }
 
         val addRelativesSheetButton = binding.addRelativesSheetButton
-        val relativesListButton = binding.relativesListButton
 
         addRelativesSheetButton.setOnClickListener {
             Navigation.findNavController(it).navigate(R.id.add_relatives_transaction)
         }
 
+        val relativesListButton = binding.relativesListButton
         relativesListButton.setOnClickListener {
             Navigation.findNavController(it).navigate(R.id.relative_list_transaction)
         }
 
+        val accountDetailButton = binding.accountDetailButton
+
+        accountDetailButton.setOnClickListener {
+            Navigation.findNavController(it).navigate((R.id.mainPage_to_accountDetail))
+        }
         return binding.root
     }
 

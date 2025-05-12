@@ -30,10 +30,11 @@ class LocationManager(private val context: Context, private val callback: (Locat
         }
 
         val locationRequest = LocationRequest.Builder(
-            Priority.PRIORITY_HIGH_ACCURACY, 10000L // Konum güncellemeleri 10 saniyede bir yapılacak
+            Priority.PRIORITY_HIGH_ACCURACY, 5000L // Konum güncellemeleri 10 saniyede bir yapılacak
         ).apply {
             setWaitForAccurateLocation(true)
             setMinUpdateIntervalMillis(5000L) // 5 saniye minimum güncelleme aralığı
+            setMaxUpdates(1)
         }.build()
 
         val locationCallback = object : LocationCallback() {
