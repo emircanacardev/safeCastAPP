@@ -1,85 +1,102 @@
 package com.example.safecast
 
 import android.Manifest
+import android.app.Activity
 import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Location
+import android.location.LocationManager as AndroidLocationManager
 import android.os.Looper
 import android.util.Log
+import androidx.annotation.RequiresPermission
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.google.android.gms.location.*
 
-class LocationManager(private val context: Context, private val callback: (Location?) -> Unit) {
+class LocationManager(private val context: Context) {
 
-    private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private val fusedLocationClient: FusedLocationProviderClient =
+        LocationServices.getFusedLocationProviderClient(context)
 
-    init {
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(context)
+    private val locationRequest = LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, 10000L)
+        .setMinUpdateIntervalMillis(5000L)
+        .build()
+
+    companion object {
+        private const val LOCATION_PERMISSION_REQUEST_CODE = 1001
     }
 
-    // Konum isteme işlemi
-    fun requestCurrentLocation() {
-        if (ActivityCompat.checkSelfPermission(
-                context,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            // Konum izni verilmemişse, izin istenmesi sağlanmalı
-            Log.e("LocationManager", "Permission not granted for location")
-            return
-        }
+    //Checks if the user has given location permission
+    fun hasLocationPermission(): Boolean {
+        return ContextCompat.checkSelfPermission(
+            context,
+            Manifest.permission.ACCESS_FINE_LOCATION
+        ) == PackageManager.PERMISSION_GRANTED
+    }
 
-        val locationRequest = LocationRequest.Builder(
-            Priority.PRIORITY_HIGH_ACCURACY, 5000L // Konum güncellemeleri 10 saniyede bir yapılacak
-        ).apply {
-            setWaitForAccurateLocation(true)
-            setMinUpdateIntervalMillis(5000L) // 5 saniye minimum güncelleme aralığı
-            setMaxUpdates(1)
-        }.build()
-
-        val locationCallback = object : LocationCallback() {
-            override fun onLocationResult(locationResult: LocationResult) {
-                val location: Location? = locationResult.lastLocation
-                if (location != null) {
-                    Log.d("LocationManager", "Real-time Lat: ${location.latitude}, Lng: ${location.longitude}")
-                    callback(location)  // Konum verisini callback ile geri gönder
-                } else {
-                    Log.d("LocationManager", "Failed to get real-time location.")
-                    callback(null)  // Konum alınamadığında null döndür
-                }
-
-                fusedLocationClient.removeLocationUpdates(this) // Konum güncellemelerini durdur
-            }
-        }
-
-        // Konum güncellemelerini başlat
-        fusedLocationClient.requestLocationUpdates(
-            locationRequest,
-            locationCallback,
-            Looper.getMainLooper()  // Ana iş parçacığında çalışacak
+    //Request the location permission
+    fun requestLocationPermission(activity: Activity) {
+        ActivityCompat.requestPermissions(
+            activity,
+            arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+            LOCATION_PERMISSION_REQUEST_CODE
         )
     }
 
-    // Son bilinen konumu almak için
-    fun getLastKnownLocation() {
-        if (ActivityCompat.checkSelfPermission(
-                context,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            // Konum izni verilmemişse, izin istenmesi sağlanmalı
-            Log.e("LocationManager", "Permission not granted for location")
+    //Checks if the location services are enabled
+    fun isLocationEnabled(): Boolean {
+        val locationManager =
+            context.getSystemService(Context.LOCATION_SERVICE) as AndroidLocationManager
+        return locationManager.isProviderEnabled(AndroidLocationManager.GPS_PROVIDER) ||
+                locationManager.isProviderEnabled(AndroidLocationManager.NETWORK_PROVIDER)
+    }
+
+    @RequiresPermission(allOf = [Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION])
+    fun getCurrentLocation(onLocationReceived: (Location?) -> Unit) {
+        if (!hasLocationPermission()) {
+            Log.e("LocationManager", "Konum izni yok")
+            onLocationReceived(null)
             return
         }
 
-        fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
-            if (location != null) {
-                Log.d("LocationManager", "Last known location - Lat: ${location.latitude}, Lng: ${location.longitude}")
-                callback(location)  // Son bilinen konumu callback ile geri gönder
-            } else {
-                Log.d("LocationManager", "No last known location available")
-                callback(null)  // Konum alınamadıysa null döndür
+        fusedLocationClient.getCurrentLocation(
+            Priority.PRIORITY_HIGH_ACCURACY,
+            null
+        ).addOnSuccessListener { location ->
+            onLocationReceived(location)
+        }.addOnFailureListener {
+            Log.e("LocationManager", "Konum alınamadı: ${it.message}")
+            onLocationReceived(null)
+        }
+    }
+
+    // Yeni fonksiyon: Gerçek zamanlı konum almak için
+    @RequiresPermission(allOf = [Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION])
+    fun requestSingleUpdate(onLocationReceived: (Location?) -> Unit) {
+        if (!hasLocationPermission()) {
+            Log.e("LocationManager", "Konum izni yok (requestSingleUpdate)")
+            onLocationReceived(null)
+            return
+        }
+
+        val request = LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, 1000L)
+            .setWaitForAccurateLocation(true)
+            .setMaxUpdates(1)
+            .build()
+
+        val callback = object : LocationCallback() {
+            override fun onLocationResult(result: LocationResult) {
+                fusedLocationClient.removeLocationUpdates(this)
+                val location = result.lastLocation
+                Log.d("LocationManager", "Güncel konum: ${location?.latitude}, ${location?.longitude}")
+                onLocationReceived(location)
             }
         }
+
+        fusedLocationClient.requestLocationUpdates(
+            request,
+            callback,
+            Looper.getMainLooper()
+        )
     }
 }

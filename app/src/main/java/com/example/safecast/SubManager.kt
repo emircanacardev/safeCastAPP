@@ -13,13 +13,14 @@ class SubManager {
     private lateinit var context: ZContext
     private lateinit var subSocket: org.zeromq.ZMQ.Socket
 
-    fun initSocket(subAddress: String, topics: List<String> )
+    fun initSocket()
     {
         context = ZContext()
         subSocket = context.createSocket(SocketType.SUB)
-        subSocket.connect(subAddress)
+        subSocket.connect("tcp://10.0.2.2:5556")
 
-        for (topic in topics) {
+
+        for (topic in listOf("I","2")) {
             subSocket.subscribe(topic.toByteArray())
         }
     }
