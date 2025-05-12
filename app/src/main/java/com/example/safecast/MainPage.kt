@@ -95,6 +95,12 @@ class MainPage : Fragment() {
             Navigation.findNavController(it).navigate(R.id.add_relatives_transaction)
         }
 
+        val notificationViewButton = binding.notificationButton
+
+        notificationViewButton.setOnClickListener {
+            Navigation.findNavController(it).navigate(R.id.mainPage_to_NotificationView)
+        }
+
         val relativesListButton = binding.relativesListButton
         relativesListButton.setOnClickListener {
             Navigation.findNavController(it).navigate(R.id.relative_list_transaction)

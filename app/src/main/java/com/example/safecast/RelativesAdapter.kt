@@ -9,7 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.safecast.databinding.RelativesItemViewBinding
 import java.util.ArrayList
 
-class RelativesAdapter (var mContext: Context, var relativesList: ArrayList<RelativeDataClass>)
+class RelativesAdapter (
+    var mContext: Context,
+    var relativesList: ArrayList<RelativeDataClass>)
     : RecyclerView.Adapter<RelativesAdapter.ViewHolderClass>(){
 
     private lateinit var firestoreManager: FirestoreManager

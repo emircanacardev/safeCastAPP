@@ -18,6 +18,9 @@
         <action
             android:id="@+id/mainPage_to_accountDetail"
             app:destination="@id/accountDetail" />
+        <action
+            android:id="@+id/mainPage_to_NotificationView"
+            app:destination="@id/notificationView" />
     </fragment>
 
     <dialog
@@ -70,15 +73,15 @@
         android:label="fragment_account_detail"
         tools:layout="@layout/fragment_account_detail" >
         <action
-            android:id="@+id/accountDetail_to_mainPage"
-            app:destination="@id/mainPageFragment"
-            app:popUpTo="@id/accountDetail"
-            app:popUpToInclusive="true" />
-        <action
             android:id="@+id/accountDetail_to_LoginPage"
             app:destination="@id/loginPage"
             app:popUpTo="@id/accountDetail"
             app:popUpToInclusive="true"/>
     </fragment>
+    <fragment
+        android:id="@+id/notificationView"
+        android:name="com.example.safecast.NotificationView"
+        android:label="NotificationView"
+        tools:layout="@layout/fragment_notification_view"/>
 
 </navigation>

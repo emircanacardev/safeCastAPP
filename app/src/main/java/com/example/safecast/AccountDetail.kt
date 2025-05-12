@@ -56,7 +56,9 @@ class AccountDetail : Fragment() {
 
 
         binding.backMainPage.setOnClickListener {
-            Navigation.findNavController(it).navigate((R.id.accountDetail_to_mainPage))
+            Navigation.findNavController(it).navigateUp()
+//            Navigation.findNavController(it).navigate((R.id.accountDetail_to_mainPage))
+
         }
 
         binding.logOutButton.setOnClickListener {
